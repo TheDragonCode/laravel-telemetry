@@ -12,20 +12,25 @@
     "require": {
         "php": "^8.2",
         "dragon-code/telemetry": "^1.0",
-        "illuminate/http": "^10.0 || ^11.0 || ^12.0",
-        "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+        "illuminate/http": "^11.0 || ^12.0",
+        "illuminate/support": "^11.0 || ^12.0"
     },
     "require-dev": {
         "dragon-code/codestyler": "^6.3",
-        "orchestra/testbench": "^10.6",
-        "pestphp/pest": "^4.0",
-        "pestphp/pest-plugin-type-coverage": "^4.0",
-        "symfony/var-dumper": "^7.3"
+        "orchestra/testbench": "^9.0 || ^10.0",
+        "pestphp/pest": "^3.0 || ^4.0",
+        "pestphp/pest-plugin-type-coverage": "^3.0 || ^4.0",
+        "symfony/var-dumper": "^6.0 || ^7.3"
     },
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "DragonCode\\LaravelTracker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "config": {
@@ -34,5 +39,23 @@
             "laravel/pint": true,
             "pestphp/pest-plugin": true
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DragonCode\\LaravelTracker\\LaravelTelemetryServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@php vendor/bin/codestyle pint 8.2 --ansi",
+            "@php vendor/bin/codestyle editorconfig --ansi",
+            "composer normalize --ansi"
+        ],
+        "style": "@php vendor/bin/pint",
+        "test": "vendor/bin/pest",
+        "test:coverage": "vendor/bin/pest --coverage",
+        "test:type": "vendor/bin/pest --type-coverage --compact --min=95"
     }
 }
