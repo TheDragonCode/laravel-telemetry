@@ -10,7 +10,7 @@ End-to-end telemetry of inter-service communication.
 
 ## Installation
 
-You can install the **:Laravel Telemetry** package via [Composer](https://getcomposer.org):
+You can install the **Laravel Telemetry** package via [Composer](https://getcomposer.org):
 
 ```Bash
 composer require dragon-code/laravel-telemetry
