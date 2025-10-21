@@ -1,37 +1,38 @@
 {
     "name": "dragon-code/laravel-telemetry",
     "description": "End-to-end telemetry of inter-service communication",
-    "type": "library",
-    "require": {
-        "php": "^8.2",
-        "illuminate/http": "^10.0|^11.0|^12.0",
-        "illuminate/support": "^10.0|^11.0|^12.0",
-        "dragon-code/telemetry": "^1.0"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^10.6",
-        "symfony/var-dumper": "^7.3",
-        "dragon-code/codestyler": "^6.3",
-        "pestphp/pest": "^4.0",
-        "pestphp/pest-plugin-type-coverage": "^4.0"
-    },
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "DragonCode\\LaravelTracker\\": "src/"
-        }
-    },
+    "type": "library",
     "authors": [
         {
             "name": "Andrey Helldar",
             "email": "helldar@dragon-code.pro"
         }
     ],
+    "require": {
+        "php": "^8.2",
+        "dragon-code/telemetry": "^1.0",
+        "illuminate/http": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+    },
+    "require-dev": {
+        "dragon-code/codestyler": "^6.3",
+        "orchestra/testbench": "^10.6",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0",
+        "symfony/var-dumper": "^7.3"
+    },
     "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "DragonCode\\LaravelTracker\\": "src/"
+        }
+    },
     "config": {
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "laravel/pint": true,
+            "pestphp/pest-plugin": true
         }
     }
 }
