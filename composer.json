@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "dragon-code/codestyler": "^6.3",
-        "orchestra/testbench": "^10.6",
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-type-coverage": "^4.0",
         "symfony/var-dumper": "^7.3"
@@ -28,11 +28,34 @@
             "DragonCode\\LaravelTracker\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
             "laravel/pint": true,
             "pestphp/pest-plugin": true
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DragonCode\\LaravelTracker\\LaravelTelemetryServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@php vendor/bin/codestyle pint 8.2 --ansi",
+            "@php vendor/bin/codestyle editorconfig --ansi",
+            "composer normalize --ansi"
+        ],
+        "style": "@php vendor/bin/pint",
+        "test": "vendor/bin/pest",
+        "test:coverage": "vendor/bin/pest --coverage",
+        "test:type": "vendor/bin/pest --type-coverage --compact --min=95"
     }
 }

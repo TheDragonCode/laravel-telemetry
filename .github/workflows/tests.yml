@@ -11,8 +11,9 @@ jobs:
             fail-fast: true
             matrix:
                 php: [ "8.2", "8.3", "8.4" ]
+                laravel: [ "10.0", "11.0", "12.0" ]
 
-        name: PHP ${{ matrix.php }}
+        name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
 
         steps:
             -   name: Checkout code
@@ -26,7 +27,7 @@ jobs:
                     coverage: xdebug
 
             -   name: Install dependencies
-                run: composer update
+                run: composer require --dev laravel/framework:^${{ matrix.laravel }}
 
             -   name: Execute tests
                 run: composer test
