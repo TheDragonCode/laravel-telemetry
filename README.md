@@ -47,7 +47,7 @@ This package is licensed under the [MIT License](LICENSE).
 
 [badge_license]:        https://img.shields.io/packagist/l/dragon-code/laravel-telemetry.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/telemetry?label=packagist&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/TheDragonCode/laravel-telemetry?label=packagist&style=flat-square
 
 [link_license]:         LICENSE
 
