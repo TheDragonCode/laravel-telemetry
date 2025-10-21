@@ -20,7 +20,7 @@
         "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
         "pestphp/pest": "^3.0 || ^4.0",
         "pestphp/pest-plugin-type-coverage": "^3.0 || ^4.0",
-        "symfony/var-dumper": "^7.3"
+        "symfony/var-dumper": "^6.0 || ^7.3"
     },
     "minimum-stability": "stable",
     "autoload": {
