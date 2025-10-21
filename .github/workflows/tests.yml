@@ -1,0 +1,76 @@
+name: Tests
+
+on:
+    push:
+
+jobs:
+    unit:
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: true
+            matrix:
+                php: [ "8.2", "8.3", "8.4" ]
+
+        name: PHP ${{ matrix.php }}
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v5
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv
+                    coverage: xdebug
+
+            -   name: Install dependencies
+                run: composer update
+
+            -   name: Execute tests
+                run: composer test
+
+    type_coverage:
+        runs-on: ubuntu-latest
+
+        name: Type Coverage
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v5
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv
+                    coverage: xdebug
+
+            -   name: Install dependencies
+                run: composer update
+
+            -   name: Execute tests
+                run: composer test:type
+
+    coverage:
+        runs-on: ubuntu-latest
+
+        name: Coverage
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v5
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv
+                    coverage: xdebug
+
+            -   name: Install dependencies
+                run: composer update
+
+            -   name: Execute tests
+                run: composer test:coverage

@@ -1,0 +1,12 @@
+name: Code Style
+
+on:
+    push:
+
+permissions: write-all
+
+jobs:
+    Checks:
+        uses: TheDragonCode/.github/.github/workflows/code-style.yml@main
+        with:
+            node: false
