@@ -16,6 +16,12 @@ You can install the **Laravel Telemetry** package via [Composer](https://getcomp
 composer require dragon-code/laravel-telemetry
 ```
 
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --tag="telemetry"
+```
+
 ## Basic Usage
 
 Register the middleware:

@@ -12,7 +12,7 @@ class LaravelTelemetryServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/telemetry.php' => $this->app->configPath('telemetry.php'),
-        ]);
+        ], ['config', 'telemetry']);
     }
 
     public function register(): void
