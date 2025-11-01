@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use DragonCode\LaravelTracker\Http\Middleware\TelemetryMiddleware;
+use DragonCode\LaravelRequestTracker\Http\Middleware\RequestTrackerMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 it('sets headers and context for guest user', function () {
-    $middleware = new TelemetryMiddleware;
+    $middleware = new RequestTrackerMiddleware;
 
     $captured = null;
 
@@ -23,16 +23,15 @@ it('sets headers and context for guest user', function () {
 
     expect($response->getStatusCode())->toBe(200);
 
-    $userId = $captured->headers->get('X-Telemetry-User-Id');
-    $ip     = $captured->headers->get('X-Telemetry-Ip');
-    $trace  = $captured->headers->get('X-Telemetry-Trace-Id');
+    $userId = $captured->headers->get('X-Tracker-User-Id');
+    $ip     = $captured->headers->get('X-Tracker-Ip');
+    $trace  = $captured->headers->get('X-Tracker-Trace-Id');
 
     expect($userId)->toBe('0');
     expect($ip)->toBe('198.51.100.42');
     expect($trace)->not()->toBeEmpty()->and(Str::isUuid($trace))->toBeTrue();
 
-    // context('telemetry') is added by middleware
-    $context = context('telemetry');
+    $context = context('tracker');
 
     expect($context)
         ->toBeArray()
@@ -44,7 +43,7 @@ it('sets headers and context for guest user', function () {
 });
 
 it('uses authenticated user id when available', function () {
-    $middleware = new TelemetryMiddleware;
+    $middleware = new RequestTrackerMiddleware;
 
     $user = new class {
         public function getKey(): int
@@ -64,22 +63,22 @@ it('uses authenticated user id when available', function () {
         }
     );
 
-    $userId = $captured->headers->get('X-Telemetry-User-Id');
+    $userId = $captured->headers->get('X-Tracker-User-Id');
 
     expect($userId)->toBe('123');
 
-    $context = context('telemetry');
+    $context = context('tracker');
 
     expect($context['userId'])->toBe('123');
 });
 
-it('respects existing telemetry headers', function () {
-    $middleware = new TelemetryMiddleware;
+it('respects existing tracker headers', function () {
+    $middleware = new RequestTrackerMiddleware;
 
     $existing = [
-        'X-Telemetry-User-Id'  => '777',
-        'X-Telemetry-Ip'       => '192.0.2.55',
-        'X-Telemetry-Trace-Id' => (string) Str::uuid(),
+        'X-Tracker-User-Id'  => '777',
+        'X-Tracker-Ip'       => '192.0.2.55',
+        'X-Tracker-Trace-Id' => (string) Str::uuid(),
     ];
 
     $captured = null;
@@ -97,9 +96,9 @@ it('respects existing telemetry headers', function () {
         expect($captured->headers->get($key))->toBe($value);
     }
 
-    $context = context('telemetry');
+    $context = context('tracker');
 
     expect($context['userId'])->toBe('777');
     expect($context['ip'])->toBe('192.0.2.55');
-    expect($context['traceId'])->toBe($existing['X-Telemetry-Trace-Id']);
+    expect($context['traceId'])->toBe($existing['X-Tracker-Trace-Id']);
 });

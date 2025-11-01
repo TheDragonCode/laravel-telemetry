@@ -1,6 +1,6 @@
 {
-    "name": "dragon-code/laravel-telemetry",
-    "description": "End-to-end telemetry of inter-service communication",
+    "name": "dragon-code/laravel-request-tracker",
+    "description": "Laravel adapter for dragon-code/request-tracker to trace inter-service request chains",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "dragon-code/telemetry": "^1.0",
+        "dragon-code/request-tracker": "^1.1",
         "illuminate/http": "^11.0 || ^12.0",
         "illuminate/support": "^11.0 || ^12.0"
     },
@@ -25,7 +25,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "DragonCode\\LaravelTracker\\": "src/"
+            "DragonCode\\LaravelRequestTracker\\": "src/"
         }
     },
     "autoload-dev": {
@@ -43,7 +43,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DragonCode\\LaravelTracker\\LaravelTelemetryServiceProvider"
+                "DragonCode\\LaravelRequestTracker\\LaravelRequestTrackerServiceProvider"
             ]
         }
     },
