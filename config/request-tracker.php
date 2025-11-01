@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 /*
 |--------------------------------------------------------------------------
-| Laravel Telemetry — configuration
+| Laravel Request Tracker
 |--------------------------------------------------------------------------
 |
-| Here you can configure the behavior of the telemetry collection package.
+| Here you can configure the behavior of the request tracking package.
 | The file reads your code at runtime and is not cached separately.
 | If necessary, publish the configuration file and adjust the values to
 | your needs.
@@ -26,7 +26,7 @@ return [
     |
     */
     'context' => [
-        'key' => 'telemetry',
+        'key' => 'tracker',
     ],
 
     /*
@@ -41,14 +41,13 @@ return [
     |
     */
     'headers' => [
-
         // Authenticated user's identifier (if any)
-        'user_id' => 'X-Telemetry-User-Id',
+        'user_id' => 'X-Tracker-User-Id',
 
         // Client IP address captured on ingress
-        'ip' => 'X-Telemetry-Ip',
+        'ip' => 'X-Tracker-Ip',
 
         // Request trace identifier (trace/span)
-        'trace_id' => 'X-Telemetry-Trace-Id',
+        'trace_id' => 'X-Tracker-Trace-Id',
     ],
 ];

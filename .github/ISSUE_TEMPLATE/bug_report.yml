@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report an Issue or Bug with the Laravel Telemetry Package
+description: Report an Issue or Bug with the Laravel Request Tracker Package
 labels: [ "bug" ]
 
 body:
@@ -23,9 +23,9 @@ body:
         validations:
             required: true
     -   type: input
-        id: laravel-telemetry-version
+        id: laravel-request-tracker-version
         attributes:
-            label: Laravel Telemetry Version
+            label: Laravel Request Tracker Version
             description: What version of our Package are you running? Please be as specific as possible
             placeholder: 1.0.0
     -   type: input
